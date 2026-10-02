@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vi Hieu Hub - Lua Deobfuscator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col justify-between p-4 md:p-6">
+    <div class="max-w-5xl mx-auto w-full">
+        <!-- Tiêu đề trang -->
+        <header class="mb-4 border-b border-gray-800 pb-3">
+            <h1 class="text-xl md:text-2xl font-bold text-blue-400">Vi Hieu Hub - Lua Deobfuscator</h1>
+            <p class="text-xs md:text-sm text-gray-400">Công cụ hỗ trợ làm sạch và định dạng mã nguồn Lua/Luau trực tuyến.</p>
+        </header>
+        
+        <!-- Khu vực nhập và xuất code -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col">
+                <label class="block mb-1 text-sm font-medium text-gray-300">Code gốc (Obfuscated Code):</label>
+                <textarea id="inputCode" class="w-full h-72 md:h-96 bg-gray-900 border border-gray-800 rounded-lg p-3 font-mono text-xs md:text-sm focus:outline-none focus:border-blue-500 resize-none text-gray-200" placeholder="Dán đoạn code Lua vào đây..."></textarea>
+            </div>
+            
+            <div class="flex flex-col">
+                <label class="block mb-1 text-sm font-medium text-gray-300">Kết quả xử lý:</label>
+                <textarea id="outputCode" readonly class="w-full h-72 md:h-96 bg-gray-900 border border-gray-800 rounded-lg p-3 font-mono text-xs md:text-sm focus:outline-none text-green-400 resize-none" placeholder="Code sau khi xử lý sẽ hiện ở đây..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Thanh menu nút bấm -->
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+            <button onclick="processCode()" class="bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-lg shadow-blue-600/25">
+                Xử lý Code
+            </button>
+            <button onclick="copyOutput()" class="bg-gray-800 hover:bg-gray-700 px-5 py-2.5 rounded-lg text-sm font-semibold transition border border-gray-700">
+                Copy Kết Quả
+            </button>
+            <button onclick="clearAll()" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 px-5 py-2.5 rounded-lg text-sm font-semibold transition">
+                Xóa Tất Cả
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-6 text-center text-xs text-gray-500 border-t border-gray-900 pt-3">
+        &copy; 2026 Vi Hieu Hub. All rights reserved.
+    </footer>
+
+    <script>
+        function processCode() {
+            let code = document.getElementById('inputCode').value;
+            if (!code.trim()) {
+                alert("Chưa nhập code kìa mày!");
+                return;
+            }
+
+            let cleaned = code.replace(/\r\n/g, '\n').trim();
+            document.getElementById('outputCode').value = cleaned;
+        }
+
+        function copyOutput() {
+            let output = document.getElementById('outputCode');
+            if (!output.value.trim()) {
+                alert("Không có gì để copy cả!");
+                return;
+            }
+            navigator.clipboard.writeText(output.value);
+            alert("Đã copy code vào clipboard!");
+        }
+
+        function clearAll() {
+            document.getElementById('inputCode').value = '';
+            document.getElementById('outputCode').value = '';
+        }
+    </script>
+</body>
+</html>
